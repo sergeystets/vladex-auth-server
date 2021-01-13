@@ -1,0 +1,63 @@
+<template>
+  <v-container>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card>
+          <v-card-text>
+            <h1 class="mb-2 di 1 text-left">Sing In</h1>
+            <v-container>
+              <form @submit.prevent="onPhoneEntered">
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field
+                        name="phone"
+                        label="Phone Number"
+                        id="phone"
+                        v-model="phone"
+                        type="text"
+                        required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout>
+                  <v-flex xs12>
+                    <v-btn type="submit" :loading="verifyPhoneLoading">Next</v-btn>
+                  </v-flex>
+                </v-layout>
+              </form>
+            </v-container>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      phone: '',
+    }
+  },
+  mounted() {
+    this.phone = this.$store.getters.phone;
+  },
+  computed: {
+    verifyPhoneLoading() {
+      return this.$store.getters.verifyPhoneLoading
+    }
+  },
+  watch: {
+    verifyPhoneLoading(value) {
+      if (value === false) {
+        this.$router.push('/login/otp')
+      }
+    }
+  },
+  methods: {
+    onPhoneEntered() {
+      this.$store.dispatch('singIn', {phone: this.phone})
+    },
+  }
+}
+</script>
