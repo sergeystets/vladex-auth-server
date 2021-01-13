@@ -13,13 +13,12 @@
             <p class="mb-2 di 1 text-left">We've sent an SMS with activation code to your phone
               {{ phone }}</p>
             <v-container>
-              <form ref="authForm" method="post" action="http://localhost:8282/login">
-                <v-text-field hidden name="username" value="+380674591293"></v-text-field>
-                <v-text-field hidden name="password" value="123ABC78"></v-text-field>
+              <form ref="signInForm" method="post" :action=signInUrl>
+                <v-text-field v-show=false name="username" v-model="phone"></v-text-field>
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
-                        name="otp"
+                        name="password"
                         label="Code"
                         :loading="loading"
                         id="otp"
@@ -81,6 +80,9 @@ export default {
     phone() {
       return this.$store.getters.phone;
     },
+    signInUrl() {
+      return process.env.VUE_APP_SERVER_URL + "/login"
+    },
     loading() {
       return this.$store.getters.loadingOtp
     },
@@ -108,7 +110,7 @@ export default {
   },
   methods: {
     onOtpEntered() {
-      this.$refs.authForm.submit();
+      this.$refs.signInForm.submit();
     },
 
     goBack() {
