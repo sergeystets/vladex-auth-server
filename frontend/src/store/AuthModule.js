@@ -23,9 +23,9 @@ const AuthModule = {
   }
   ,
   actions: {
-    singIn({commit}, payload) {
+    signIn({commit}, payload) {
       commit('setVerifyPhoneLoading', true)
-      api.singIn(payload.phone).then(function (response) {
+      api.signIn(payload.phone).then(function (response) {
         commit('setVerifyPhoneLoading', false)
         commit('setPhone', payload.phone);
         commit('setOtpExpirationSeconds', response.data.otpExpirationSeconds)

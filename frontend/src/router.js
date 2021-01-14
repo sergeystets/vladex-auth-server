@@ -11,20 +11,20 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/sign-in'
     },
     {
       path: '/index.html',
-      redirect: '/login'
+      redirect: '/sign-in'
     },
     {
-      path: '/login',
+      path: '/sign-in',
       name: 'Signin',
       component: Signin,
       beforeEnter: FlowGuard
     },
     {
-      path: '/login/otp',
+      path: '/sign-in/otp',
       name: 'Signin2',
       component: Signin2,
       beforeEnter: FlowGuard

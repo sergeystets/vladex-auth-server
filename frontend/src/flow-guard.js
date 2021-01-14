@@ -1,12 +1,12 @@
 export default (to, from, next) => {
-  // if user goes from login to login/otp
-  if ((from.fullPath === "/login" && to.fullPath === "/login/otp") ||
-      // or back to login from login/otp
-      (to.fullPath === "/login" && from.fullPath === "/login/otp") ||
-      // or he simply goes to a login page
-      to.fullPath === "/login") {
+  // if user goes from sign-in to sign-in/otp
+  if ((from.fullPath === "/sign-in" && to.fullPath === "/sign-in/otp") ||
+      // or back to sign-in from sign-in/otp
+      (to.fullPath === "/sign-in" && from.fullPath === "/sign-in/otp") ||
+      // or he simply goes to a sign-in page
+      to.fullPath === "/sign-in") {
     next()
   } else {
-    next('/login')
+    next('/sign-in')
   }
 }

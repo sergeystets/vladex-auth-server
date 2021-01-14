@@ -1,7 +1,7 @@
 package com.vladex.authserver.controller;
 
 import com.vladex.authserver.model.SignInResponse;
-import com.vladex.authserver.model.SingInRequest;
+import com.vladex.authserver.model.SignInRequest;
 import com.vladex.authserver.service.SignInService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("sing-in")
+@RequestMapping("sign-in")
 public class SignInController {
 
   private final SignInService signInService;
 
   @PostMapping
-  public SignInResponse singIn(@RequestBody @Valid SingInRequest singInRequest) {
-    return signInService.singIn(singInRequest);
+  public SignInResponse singIn(@RequestBody @Valid SignInRequest signInRequest) {
+    return signInService.signIn(signInRequest);
   }
 }

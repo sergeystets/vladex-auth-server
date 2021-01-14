@@ -1,13 +1,6 @@
 <template>
   <v-app>
     <v-navigation-drawer absolute temporary v-model="drawerToggle">
-      <v-list>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon>mdi-account</v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
     </v-navigation-drawer>
     <v-app-bar app class="light-blue darken-1">
       <v-app-bar-nav-icon @click.native.stop="drawerToggle = !drawerToggle"></v-app-bar-nav-icon>

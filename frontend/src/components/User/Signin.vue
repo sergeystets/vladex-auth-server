@@ -4,7 +4,7 @@
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-card-text>
-            <h1 class="mb-2 di 1 text-left">Sing In</h1>
+            <h1 class="mb-2 di 1 text-left">Sign In</h1>
             <v-container>
               <form @submit.prevent="onPhoneEntered">
                 <v-layout row>
@@ -50,13 +50,13 @@ export default {
   watch: {
     verifyPhoneLoading(value) {
       if (value === false) {
-        this.$router.push('/login/otp')
+        this.$router.push('/sign-in/otp')
       }
     }
   },
   methods: {
     onPhoneEntered() {
-      this.$store.dispatch('singIn', {phone: this.phone})
+      this.$store.dispatch('signIn', {phone: this.phone})
     },
   }
 }

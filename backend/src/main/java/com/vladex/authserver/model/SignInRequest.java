@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class SingInRequest {
+public class SignInRequest {
 
   @NotNull
   private String phoneNumber;

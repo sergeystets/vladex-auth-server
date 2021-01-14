@@ -7,7 +7,7 @@ const AXIOS = axios.create({
 
 export default {
 
-  singIn(phoneNumber) {
-    return AXIOS.post("/sing-in", {phoneNumber: phoneNumber});
+  signIn(phoneNumber) {
+    return AXIOS.post("/sign-in", {phoneNumber: phoneNumber});
   }
 }

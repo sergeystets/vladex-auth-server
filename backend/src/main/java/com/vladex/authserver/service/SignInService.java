@@ -7,7 +7,7 @@ import com.vladex.authserver.entity.PendingVerificationEntity;
 import com.vladex.authserver.exception.ApiErrorException;
 import com.vladex.authserver.model.OtpToken;
 import com.vladex.authserver.model.SignInResponse;
-import com.vladex.authserver.model.SingInRequest;
+import com.vladex.authserver.model.SignInRequest;
 import com.vladex.authserver.repository.UserRepository;
 import com.vladex.authserver.service.otp.OtpGenerator;
 import com.vladex.authserver.service.otp.OtpSender;
@@ -32,8 +32,8 @@ public class SignInService {
   private long otpExpirationSeconds;
 
   @Transactional
-  public SignInResponse singIn(SingInRequest singInRequest) {
-    final String phoneNumber = singInRequest.getPhoneNumber();
+  public SignInResponse signIn(SignInRequest signInRequest) {
+    final String phoneNumber = signInRequest.getPhoneNumber();
     if (!userRepository.existsByPhoneNumber(phoneNumber)) {
       throw new ApiErrorException(PHONE_NUMBER_IS_NOT_REGISTERED);
     }
