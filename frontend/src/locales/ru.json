@@ -1,0 +1,9 @@
+{
+  "label.sign-in": "Вход",
+  "input.hint.phoneNumber": "Номер телефона",
+  "button.next": "Далее",
+  "text.sms.was.sent": "Мы выслали СМС с паролем на ваш номер телефона ",
+  "button.back": "Назад",
+  "input.hint.code": "Пароль из СМС",
+  "text.it.will.expire.in": "Срок действия пароля истекает чеерез:"
+}

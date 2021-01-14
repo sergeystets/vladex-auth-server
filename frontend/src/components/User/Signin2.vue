@@ -5,12 +5,12 @@
         <v-flex xs12>
           <v-btn v-on:click="goBack">
             <v-icon dark left>arrow_back</v-icon>
-            Back
+            {{ $t('button.back') }}
           </v-btn>
         </v-flex>
         <v-card>
           <v-card-text>
-            <p class="mb-2 di 1 text-left">We've sent an SMS with activation code to your phone
+            <p class="mb-2 di 1 text-left">{{ $t('text.sms.was.sent') }}
               {{ phone }}</p>
             <v-container>
               <form ref="signInForm" method="post" :action=signInUrl>
@@ -19,7 +19,7 @@
                   <v-flex xs12>
                     <v-text-field
                         name="password"
-                        label="Code"
+                        :label="$t('input.hint.code')"
                         :loading="loading"
                         id="otp"
                         v-model="otp"
@@ -27,7 +27,7 @@
                         required></v-text-field>
                   </v-flex>
                 </v-layout>
-                <p class="mb-2 di 1 text-left">It will expire in:
+                <p class="mb-2 di 1 text-left">{{ $t('text.it.will.expire.in') }}
                   {{ expirationCounter | formatCounter }}</p>
               </form>
             </v-container>

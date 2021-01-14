@@ -4,14 +4,14 @@
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-card-text>
-            <h1 class="mb-2 di 1 text-left">Sign In</h1>
+            <h1 class="mb-2 di 1 text-left">{{ $t('label.sign-in') }}</h1>
             <v-container>
               <form @submit.prevent="onPhoneEntered">
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
                         name="phone"
-                        label="Phone Number"
+                        :label="$t('input.hint.phoneNumber')"
                         id="phone"
                         v-model="phone"
                         type="text"
@@ -20,7 +20,7 @@
                 </v-layout>
                 <v-layout>
                   <v-flex xs12>
-                    <v-btn type="submit" :loading="verifyPhoneLoading">Next</v-btn>
+                    <v-btn type="submit" :loading="verifyPhoneLoading">{{ $t('button.next') }}</v-btn>
                   </v-flex>
                 </v-layout>
               </form>
