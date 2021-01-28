@@ -1,6 +1,7 @@
 package com.vladex.authserver.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final JdbcUserDetailsService userDetailsService;
 
+  @Value("${app.security.logout.url}")
+  private String successLogoutUrl;
+
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http
@@ -23,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authenticated()
         .and().csrf().disable()
         .cors().and()
-        .logout().deleteCookies("JSESSIONID").and()
+        .logout().logoutSuccessUrl(successLogoutUrl).deleteCookies("JSESSIONID").and()
         .formLogin().loginPage("/").loginProcessingUrl("/login");
   }
 
