@@ -57,7 +57,7 @@ export default {
   methods: {
     onPhoneEntered() {
       this.$store.dispatch('signIn', {phone: this.phone})
-    },
+    }
   }
 }
 </script>
