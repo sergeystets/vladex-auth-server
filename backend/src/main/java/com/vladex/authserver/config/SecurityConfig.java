@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final JdbcUserDetailsService userDetailsService;
 
-  @Value("${app.security.logout.url}")
+  @Value("${app.security.logout.success.url}")
   private String successLogoutUrl;
 
   @Override
