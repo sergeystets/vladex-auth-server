@@ -5,5 +5,6 @@
   "text.sms.was.sent": "We've sent an SMS with activation code to your phone ",
   "button.back": "Back",
   "input.hint.code": "Code",
-  "text.it.will.expire.in": "It will expire in:"
+  "text.it.will.expire.in": "It will expire in:",
+  "text.signing-in": "Signing in..."
 }

@@ -46,7 +46,7 @@
             class="subtitle-1 text-center"
             cols="12"
         >
-          Singing in...
+          {{ $t('text.signing-in') }}
         </v-col>
         <v-col cols="6">
           <v-progress-linear

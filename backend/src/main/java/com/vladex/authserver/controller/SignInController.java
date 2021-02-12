@@ -18,7 +18,7 @@ public class SignInController {
   private final SignInService signInService;
 
   @PostMapping
-  public SignInResponse singIn(@RequestBody @Valid SignInRequest signInRequest) {
+  public SignInResponse signIn(@RequestBody @Valid SignInRequest signInRequest) {
     return signInService.signIn(signInRequest);
   }
 }
