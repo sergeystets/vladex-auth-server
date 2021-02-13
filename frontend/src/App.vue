@@ -4,8 +4,8 @@
       <v-toolbar-title class="white--text">Vladex</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <router-view></router-view>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
