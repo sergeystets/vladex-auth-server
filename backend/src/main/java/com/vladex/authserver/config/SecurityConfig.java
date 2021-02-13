@@ -17,6 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${app.security.logout.success.url}")
   private String successLogoutUrl;
+  @Value("${app.security.success.login.url}")
+  private String defaultSuccessUrl;
 
   @Override
   public void configure(HttpSecurity http) throws Exception {
@@ -28,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and().csrf().disable()
         .cors().and()
         .logout().logoutSuccessUrl(successLogoutUrl).deleteCookies("JSESSIONID").and()
-        .formLogin().loginPage("/").loginProcessingUrl("/login");
+        .formLogin().defaultSuccessUrl(defaultSuccessUrl).loginPage("/").loginProcessingUrl("/login");
   }
 
   @Override
