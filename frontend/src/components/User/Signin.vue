@@ -11,11 +11,13 @@
                   <v-flex xs12>
                     <v-text-field
                         name="phone"
+                        @keydown="errors = []"
                         :label="$t('input.hint.phoneNumber')"
                         id="phone"
                         v-model="phone"
                         type="text"
-                        required></v-text-field>
+                        :error-messages="errors"
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout>
@@ -33,30 +35,36 @@
 </template>
 
 <script>
+import api from "@/server-api";
+
 export default {
   data() {
     return {
       phone: '',
+      verifyPhoneLoading: false,
+      errors: []
     }
   },
   mounted() {
     this.phone = this.$store.getters.phone;
   },
-  computed: {
-    verifyPhoneLoading() {
-      return this.$store.getters.verifyPhoneLoading
-    }
-  },
-  watch: {
-    verifyPhoneLoading(value) {
-      if (value === false) {
-        this.$router.push('/sign-in/otp')
-      }
-    }
-  },
   methods: {
     onPhoneEntered() {
-      this.$store.dispatch('signIn', {phone: this.phone})
+      if (this.phone === undefined || this.phone === null || this.phone.trim() === "") {
+        this.errors.push(this.$t('validation.phone.number.is.required'));
+        return;
+      }
+      this.verifyPhoneLoading = true;
+      api.signIn(this.phone).then(res => {
+        this.verifyPhoneLoading = false;
+        this.$store.dispatch("phoneVerified", {phone: this.phone, otpExpirationSeconds: res.data.otpExpirationSeconds});
+        this.$router.push('/sign-in/otp');
+      }).catch(err => {
+        this.verifyPhoneLoading = false;
+        if (err && err.response && err.response.data && err.response.data.errorCode === "PHONE_NUMBER_IS_NOT_REGISTERED") {
+          this.errors.push(this.$t('validation.phone.number.is.not.registered'));
+        }
+      });
     }
   }
 }

@@ -6,5 +6,7 @@
   "button.back": "Back",
   "input.hint.code": "Code",
   "text.it.will.expire.in": "It will expire in:",
-  "text.signing-in": "Signing in..."
+  "text.signing-in": "Signing in...",
+  "validation.phone.number.is.not.registered": "Phone number is not registered",
+  "validation.phone.number.is.required": "Phone number is required"
 }

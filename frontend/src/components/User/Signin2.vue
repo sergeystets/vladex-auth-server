@@ -20,11 +20,9 @@
                     <v-text-field
                         name="password"
                         :label="$t('input.hint.code')"
-                        :loading="loading"
                         id="otp"
                         v-model="otp"
-                        type="text"
-                        required></v-text-field>
+                        type="text"></v-text-field>
                   </v-flex>
                 </v-layout>
                 <p class="mb-2 di 1 text-left">{{ $t('text.it.will.expire.in') }}
@@ -71,20 +69,15 @@ export default {
       showOtpVerificationForm: true
     }
   },
-
   mounted() {
     this.expirationCounter = this.otpExpirationSeconds;
   },
-
   computed: {
     phone() {
       return this.$store.getters.phone;
     },
     signInUrl() {
       return process.env.VUE_APP_SERVER_URL + "/login"
-    },
-    loading() {
-      return this.$store.getters.loadingOtp
     },
     otpExpirationSeconds() {
       return this.$store.getters.otpExpirationSeconds
@@ -106,13 +99,11 @@ export default {
         }
       },
     },
-
   },
   methods: {
     onOtpEntered() {
       this.$refs.signInForm.submit();
     },
-
     goBack() {
       this.$router.go(-1);
     }

@@ -6,5 +6,7 @@
   "button.back": "Назад",
   "input.hint.code": "Пароль из СМС",
   "text.it.will.expire.in": "Срок действия пароля истекает через:",
-  "text.signing-in": "Вход..."
+  "text.signing-in": "Вход...",
+  "validation.phone.number.is.not.registered": "Номер телефона не зарегистрирован",
+  "validation.phone.number.is.required": "Введите номер телефона"
 }
