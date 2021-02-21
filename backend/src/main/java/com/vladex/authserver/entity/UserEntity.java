@@ -9,12 +9,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @ToString
 @Entity
 @Table(name = "user")
+@Accessors(chain = true)
 public class UserEntity {
 
   @Id

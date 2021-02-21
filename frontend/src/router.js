@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Signin from "@/components/User/Signin";
-import Signin2 from "@/components/User/Signin2";
+import Signin from "@/components/Signin";
+import Signin2 from "@/components/Signin2";
 import FlowGuard from './flow-guard'
 
 Vue.use(Router);

@@ -1,22 +1,24 @@
 package com.vladex.authserver.service;
 
-import static com.vladex.authserver.exception.ErrorCode.PHONE_NUMBER_IS_NOT_REGISTERED;
-
-import com.vladex.authserver.repository.PendingVerificationRepository;
 import com.vladex.authserver.entity.PendingVerificationEntity;
+import com.vladex.authserver.entity.UserEntity;
 import com.vladex.authserver.exception.ApiErrorException;
 import com.vladex.authserver.model.OtpToken;
-import com.vladex.authserver.model.SignInResponse;
 import com.vladex.authserver.model.SignInRequest;
+import com.vladex.authserver.model.SignInResponse;
+import com.vladex.authserver.repository.PendingVerificationRepository;
 import com.vladex.authserver.repository.UserRepository;
 import com.vladex.authserver.service.otp.OtpGenerator;
 import com.vladex.authserver.service.otp.OtpSender;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.Clock;
+import java.time.LocalDateTime;
+
+import static com.vladex.authserver.exception.ErrorCode.PHONE_NUMBER_IS_NOT_REGISTERED;
 
 @Service
 @RequiredArgsConstructor
@@ -32,10 +34,18 @@ public class SignInService {
   private long otpExpirationSeconds;
 
   @Transactional
-  public SignInResponse signIn(SignInRequest signInRequest) {
+  public SignInResponse signIn(SignInRequest signInRequest, boolean fromMobile) {
+    final SignInResponse signInResponse = new SignInResponse();
+
     final String phoneNumber = signInRequest.getPhoneNumber();
     if (!userRepository.existsByPhoneNumber(phoneNumber)) {
-      throw new ApiErrorException(PHONE_NUMBER_IS_NOT_REGISTERED);
+      if (fromMobile) {
+        // dynamically add a new user (and notify that he still needs to complete registration)
+        signInResponse.setRequiresRegistration(true);
+        userRepository.saveAndFlush(new UserEntity().setName("").setPhoneNumber(phoneNumber));
+      } else {
+        throw new ApiErrorException(PHONE_NUMBER_IS_NOT_REGISTERED);
+      }
     }
 
     // delete old OTP codes (if any)
@@ -55,6 +65,7 @@ public class SignInService {
     // send OTP to a client
     otpSender.sendOtp(new OtpToken(otp, phoneNumber));
 
-    return new SignInResponse(otpExpirationSeconds);
+    signInResponse.setOtpExpirationSeconds(otpExpirationSeconds);
+    return signInResponse;
   }
 }

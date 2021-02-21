@@ -1,6 +1,5 @@
 package com.vladex.authserver.config;
 
-import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +21,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
@@ -73,7 +74,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .redirectUris("http://localhost:8080/sign-in/success", "http://178.165.0.142:8081/sign-in/success")
         .autoApprove(true)
         .accessTokenValiditySeconds(60 * 60 * 24)
-        .refreshTokenValiditySeconds(240000);
+        .refreshTokenValiditySeconds(240000)
+
+            .and()
+
+         .withClient("vladex-mobile")
+         .authorizedGrantTypes("implicit")
+         .authorities("USER")
+         .scopes("API")
+         .redirectUris("app://vladex-messenger")
+         .autoApprove(true)
+         .accessTokenValiditySeconds(60 * 60 * 24)
+         .refreshTokenValiditySeconds(240000);
   }
 
   @Bean

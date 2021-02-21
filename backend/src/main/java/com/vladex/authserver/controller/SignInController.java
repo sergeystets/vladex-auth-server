@@ -19,6 +19,6 @@ public class SignInController {
 
   @PostMapping
   public SignInResponse signIn(@RequestBody @Valid SignInRequest signInRequest) {
-    return signInService.signIn(signInRequest);
+    return signInService.signIn(signInRequest, false);
   }
 }
