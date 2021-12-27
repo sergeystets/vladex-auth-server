@@ -71,7 +71,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .authorizedGrantTypes("implicit")
         .authorities("USER")
         .scopes("API")
-        .redirectUris("http://localhost:8081/sign-in/success", "http://localhost:8080/sign-in/success", "http://178.165.0.142:8081/sign-in/success")
+        .redirectUris(
+          "http://localhost:8081/sign-in/success",
+          "http://localhost:8080/sign-in/success",
+          "https://178.165.0.142:8081/sign-in/success")
         .autoApprove(true)
         .accessTokenValiditySeconds(60 * 60 * 24)
         .refreshTokenValiditySeconds(240000)
